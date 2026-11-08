@@ -1,7 +1,7 @@
 from textual import on
 from textual.containers import Horizontal, Vertical
 from textual.screen import Screen
-from textual.widgets import Input, Label, Static
+from textual.widgets import Footer, Input, Label, Static
 from textual.widgets import ListItem as TextualListItem
 
 import tui_movie_tv_tracker.database as database
@@ -132,6 +132,7 @@ class SearchScreen(Screen):
             ),
             id="search-screen-container",
         )
+        yield Footer()
 
     def on_mount(self):
         self.query_one("#search-input").focus()
