@@ -23,7 +23,6 @@ async def search(query, media_type):
 
 async def search_movie(query):
     api_key = os.getenv("TMDB_API_KEY")
-    # api_key = dotenv_values(".env")["TMDB_API_KEY"]
     url = f"https://api.themoviedb.org/3/search/movie?query={query}&include_adult=false&language=en-US&page=1"
 
     headers = {"Authorization": f"Bearer {api_key}", "accept": "application/json"}
@@ -51,7 +50,7 @@ async def search_movie(query):
 
 
 async def search_tv(query):
-    api_key = dotenv_values(".env")["TMDB_API_KEY"]
+    api_key = os.getenv("TMDB_API_KEY")
     url = f"https://api.themoviedb.org/3/search/tv?query={query}&include_adult=false&language=en-US&page=1"
 
     headers = {"Authorization": f"Bearer {api_key}", "accept": "application/json"}
