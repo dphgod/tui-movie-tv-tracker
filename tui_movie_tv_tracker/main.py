@@ -1,5 +1,7 @@
 import sys
+from pathlib import Path
 
+from dotenv import load_dotenv
 from textual import on
 from textual.app import App
 from textual.containers import Horizontal, Vertical
@@ -154,6 +156,22 @@ class LayoutApp(App):
 
 
 def start():
+    # Define a persistent config directory in the user's home folder
+    config_dir = Path.home() / ".config" / "your_app_name"
+    config_dir.mkdir(exist_ok=True)
+
+    env_path = config_dir / ".env"
+
+    if not env_path.exists():
+        tmdb_key = input(
+            "Please enter your TMDB API key (You can get one for free at https://developer.themoviedb.org/reference/authentication)\n"
+        )
+        with open(env_path, "w") as f:
+            f.write(f"TMDB_API_KEY={tmdb_key}")
+
+    load_dotenv(env_path)
+
+    # config_dir.mkdir(parents=True, exist_ok=True)
     if len(sys.argv) > 1:
         app = LayoutApp(sys.argv[1])
     else:
